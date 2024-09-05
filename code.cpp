@@ -53,6 +53,7 @@ private:
             swap(A[i], A[parent]);
             heapify_up(parent);
         }
+        
     }
 
 public:
@@ -84,6 +85,11 @@ public:
         A.pop_back();
 
         heapify_down(0);
+    }
+    void print(){
+        for(auto it:A){
+            cout<<it->letter<<" "<<it->freq<<endl;
+        }
     }
 
     huffman_tree *top()
@@ -230,7 +236,8 @@ void messageEncode(string message)
     file.close();
     root = buildTree(pq);
     
-    // cout<<"Inside encode"<<pq.size()<<endl;
+    cout<<"Inside encode"<<pq.size()<<endl;
+    // pq.print();
     vector<int> arr(pq.size());
     findCodes(root, arr, 0);
     file.open("encoded_data.txt");
