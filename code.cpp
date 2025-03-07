@@ -48,7 +48,7 @@ private:
     void heapify_up(int i)
     {
         int parent = (i - 1) / 2;
-        if (i && A[parent]->freq > A[i]->freq)
+        if (i && A[parent]->freq >= A[i]->freq)
         {
             swap(A[i], A[parent]);
             heapify_up(parent);
@@ -80,11 +80,17 @@ public:
         {
             return;
         }
-
+        cout<<"Before Popping\n";
+        print();
         A[0] = A.back();
         A.pop_back();
+        cout<<"After popping\n";
+        print();
 
         heapify_down(0);
+        cout<<"After heapify down\n";
+        print();
+        
     }
     void print(){
         for(auto it:A){
@@ -228,6 +234,9 @@ void messageEncode(string message)
         pq.push(node);
         
     }
+    cout<<"=====================\n";
+    pq.print();
+    cout<<"=====================\n";
     // cout<<"\ncomplete"<<endl;
     ofstream file;
     file.open("huffmanTable.txt");
@@ -236,8 +245,7 @@ void messageEncode(string message)
     file.close();
     root = buildTree(pq);
     
-    cout<<"Inside encode"<<pq.size()<<endl;
-    // pq.print();
+
     vector<int> arr(pq.size());
     findCodes(root, arr, 0);
     file.open("encoded_data.txt");
@@ -245,7 +253,7 @@ void messageEncode(string message)
     {
         string codedString = "";
         codedString += freq[c].second;
-        cout << codedString << endl;
+        // cout << codedString << endl;
         file << codedString;
     }
     file << endl;
@@ -265,9 +273,9 @@ void findfrequeny(string message)
     {
         freq[c].first++;
     }
-    for(auto it:freq){
-        cout<<it.first<<" "<<it.second.first<<endl;
-    }
+    // for(auto it:freq){
+    //     cout<<it.first<<" "<<it.second.first<<endl;
+    // }
 
     
 }
